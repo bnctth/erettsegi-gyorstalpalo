@@ -2,7 +2,7 @@
 
 [Bevezetés](README.md)
 - [Struktúrák](struct.md)
-- [Alaplgoritmusok](alapalgoritmusok/README.md)
+- [Alapalgoritmusok](alapalgoritmusok/README.md)
     - [Összegzés](alapalgoritmusok/osszegzes.md)
     - [Megszámlálás](alapalgoritmusok/megszamlalas.md)
     - [Szélső érték keresés](alapalgoritmusok/minmax.md)
