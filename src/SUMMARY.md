@@ -7,5 +7,6 @@
     - [Megszámlálás](alapalgoritmusok/megszamlalas.md)
     - [Szélső érték keresés](alapalgoritmusok/minmax.md)
     - [Sorbarendezés](alapalgoritmusok/rendezes.md)
+    - [Első és utolsó érték megtalálása](alapalgoritmusok/elso-utolso.md)
 - [Beolvasás fájlból](beolvasas.md)
 - [Trükkök kiíratáshoz](kiiratas.md)
