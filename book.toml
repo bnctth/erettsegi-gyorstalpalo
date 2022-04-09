@@ -4,3 +4,9 @@ language = "hu"
 multilingual = false
 src = "src"
 title = "Programozás érettségi gyorstalpaló"
+
+[output.html]
+preferred-dark-theme = "ayu"
+git-repository-url = "https://github.com/bnctth/erettsegi-gyorstalpalo"
+edit-url-template = "https://github.com/bnctth/erettsegi-gyorstalpalo/edit/main/{path}"
+cname = "gyorstalpalo.bnctth.dev"
