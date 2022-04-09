@@ -1,0 +1,6 @@
+[book]
+authors = ["Tóth Bence"]
+language = "hu"
+multilingual = false
+src = "src"
+title = "Programozás érettségi gyorstalpaló"
