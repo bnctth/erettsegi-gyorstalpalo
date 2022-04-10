@@ -6,6 +6,7 @@ src = "src"
 title = "Programozás érettségi gyorstalpaló"
 
 [output.html]
+default-theme = "ayu"
 preferred-dark-theme = "ayu"
 git-repository-url = "https://github.com/bnctth/erettsegi-gyorstalpalo"
 edit-url-template = "https://github.com/bnctth/erettsegi-gyorstalpalo/edit/main/{path}"
