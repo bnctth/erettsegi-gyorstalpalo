@@ -11,4 +11,4 @@
 - [Beolvasás fájlból](beolvasas.md)
 - [Egyéb hasznos dolgok](egyeb/README.md)
     - [Trükkök kiíratáshoz](egyeb/formazas.md)
-    - [Véletlenszám-generálás]()
+    - [Véletlenszám-generálás](egyeb/random.md)
