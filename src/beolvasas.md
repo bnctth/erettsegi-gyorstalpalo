@@ -28,7 +28,7 @@ int n; //ez lesz a tömb hossza
 be >> n;
 adat tomb[n];
 for(int i = 0; i < n; i++){
-    be >> tomb[n].mezo1 >> tomb[n].mezo2 >> tomb[n].mezo3;
+    be >> tomb[i].mezo1 >> tomb[i].mezo2 >> tomb[i].mezo3;
 }
 be.close();
 ```
@@ -77,7 +77,28 @@ while(!file.eof()){
 // n--; // ha kell
 adat tomb[n];
 for(int i = 0; i < n; i++){
-    be >> tomb[n].mezo1 >> tomb[n].mezo2 >> tomb[n].mezo3;
+    be >> tomb[i].mezo1 >> tomb[i].mezo2 >> tomb[i].mezo3;
 }
 be.close();
+```
+
+## `>>` vagy `getline`
+
+A `>>` operátor ún. _whitespace_ karakterekig olvas be, ilyen például a szóköz, a tab, vagy a sorvég. Emiatt nem tudjuk használni, ha ismeretlen számú, szóközzel elválasztott szöveget kell beolvasnunk. Ilyen például egy zene címe, vagy emberek neve, ha nincs megadva, hogy hány neve van mindenkinek.
+
+Viszont nagy problémát szokott okozni, hogy a `>>` az elválasztó karakter előtt áll meg, míg a `getline` utána. Úgy kell elképzelni ezeket, mint amikor a kisgyerekek olvasnak: ahogy haladnak betűről betűre, úgy viszik az ujjukat is. Amikor valamiért megállnak, ott tartják az ujjukat, majd később onnan folytatják. Emiatt probléma, hogy a `>>` a sorvég előtt _hagyja az ujját_, hiszen utána a `getline` elkezd olvasni, az első karakter, amit meglát az a sorvég, és azt mondja köszöni szépen végzett is. Emiatt ha `>>`-ről váltunk `getline`ra, azt mindig kétszer kell futtatni, mert először egy üres `string`et ad, majd másodszor adja a tényleges sort. Fordított helyzetben ezzel nincs probléma. Nézzünk is erre egy példát. Minden sorban egy szám, majd tetszőleges mennyiségű szó van.
+
+```cpp
+struct adat{
+    int szam;
+    string szoveg;
+}
+
+adat tomb[n];
+string szemet; //ebbe fog menni az üres string
+for(int i = 0; i < n; i++){
+    be >> tomb[i].szam;
+    getline(be, szemet);
+    getline(be, tomb[i].szoveg);
+}
 ```
