@@ -9,6 +9,6 @@
     - [Szélső érték keresés](alapalgoritmusok/minmax.md)
     - [Sorbarendezés](alapalgoritmusok/rendezes.md)
 - [Beolvasás fájlból](beolvasas.md)
-- [Egyéb hasznos dolgok]()
-    - [Trükkök kiíratáshoz]()
+- [Egyéb hasznos dolgok](egyeb/README.md)
+    - [Trükkök kiíratáshoz](egyeb/formazas.md)
     - [Véletlenszám-generálás]()
