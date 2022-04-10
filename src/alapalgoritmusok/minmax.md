@@ -93,3 +93,5 @@ for(int i = max_index; i < 50; i++){ // itt nyugodtan kezdhetünk max_indexről,
     }
 }
 ```
+
+<!-- ? lehet egységesen érték vagy index szerint jobb lenne -->
