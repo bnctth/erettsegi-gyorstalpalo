@@ -82,6 +82,7 @@ int max_index = -1;
 for(int i = 0; i < 50; i++){
     if(tomb[i].keresztnev == "Béla"){
         max_index = i;
+        break;
     }
 }
 
