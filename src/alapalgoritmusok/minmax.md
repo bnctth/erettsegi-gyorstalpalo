@@ -1,6 +1,6 @@
 # Szélső érték keresés
 
-Szélső érték keresése alatt a legkisebb vagy legnagyobb érték kereséséről beszélünk. Itt már egy fokkal nagyobb az eltérés a primitív és a struktúrás verzió között. A példákban mindig a maximumot fogom keresni, de a minimumhoz csak meg kell fordítani a kacsacsőröket.
+Szélső érték keresése alatt a legkisebb vagy legnagyobb érték kereséséről beszélünk. Lehet az értéket vagy az indexet eltárolni, én az utóbbit javaslom mindenhez, mert ezzel rengeteg elnézhető dolog elkerülhető. A példákban mindig a maximumot fogom keresni, de a minimumhoz csak meg kell fordítani a kacsacsőröket.
 
 ## Alap
 
@@ -9,16 +9,14 @@ Szélső érték keresése alatt a legkisebb vagy legnagyobb érték keresésér
 ```cpp
 int tomb[50] = {...};
 
-int max = tomb[0];
+int max_index = 0;
 
 for(int i = 1; i < 50; i++){  // i = 1, mert a nulladik már úgyis a max
-    if(tomb[i] > max){ // ha a *legnagyobbnál* találunk egy nagyobbat
-        max = tomb[i]; // átveszi az a helyét
+    if(tomb[i] > tomb[max_index]){ // ha a *legnagyobbnál* találunk egy nagyobbat
+        max_index = i; // átveszi az a helyét
     }
 }
 ```
-
-Az alapérték azért a tömb első eleme, mert így garantáltan szerepel a tömbben. Ha simán beállítjuk a 0-t, de a tömbünkben csak negatív számok vannak, azok sosem lesznek nagyobbak, mint az alapérték, így (hibásan) azt fogja mondani, hogy a 0 a legnagyobb.
 
 ### Struktúra
 
@@ -53,17 +51,17 @@ Keressük meg a legnagyobb negatív számot.
 ```cpp
 int tomb[50] = {...};
 
-int max = -1; // muszáj a `for`on kívül felvenni, különben azon kívül nem lenne elérhető
+int max_index = -1; // muszáj a `for`on kívül felvenni, különben azon kívül nem lenne elérhető
 for(int i = 0; i < 50; i++){
     if(tomb[i] < 0){
-        max = tomb[i];
+        max_index = i;
         break;
     }
 }
 
-for(int i = 0; i < 50; i++){
-    if(tomb[i] < 0 && tomb[i] > max){
-        max = tomb[i];
+for(int i = max_index+1; i < 50; i++){ // itt nyugodtan kezdhetünk max_indexről, hiszen tudjuk, előtte nincs megfelelő érték
+    if(tomb[i] < 0 && tomb[i] > tomb[max_index]){
+        max_index = i;
     }
 }
 ```
@@ -87,11 +85,9 @@ for(int i = 0; i < 50; i++){
     }
 }
 
-for(int i = max_index; i < 50; i++){ // itt nyugodtan kezdhetünk max_indexről, hiszen tudjuk, előtte nincs megfelelő érték
+for(int i = max_index+1; i < 50; i++){
     if(tomb[i].keresztnev == "Béla" && tomb[i].szavazat > tomb[max_index].szavazat){
         max_index = i;
     }
 }
 ```
-
-<!-- ? lehet egységesen érték vagy index szerint jobb lenne -->
