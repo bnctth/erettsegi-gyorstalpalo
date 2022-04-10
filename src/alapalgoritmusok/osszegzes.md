@@ -31,3 +31,20 @@ for(int i = 0; i < 50; i++) {
 ```
 
 Pusztán annyi változik, ha nem pozitív a szám, semmit sem csinálunk.
+
+De ha struktúránk van, az se probléma. Itt is csak a megfelelő mezőkkel kell dolgozni.
+```cpp
+struct adat{
+    bool feltetel;
+    int ertek;
+}
+
+adat tomb[50] = {...};
+
+int osszeg = 0;
+for(int i = 0; i < 50; i++) {
+    if(tomb[i].feltetel) { // itt nem kell == true, hiszen a bool maga egy true-false érték
+        osszeg += tomb[i].ertek;
+    }
+}
+```
