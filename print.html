@@ -1,0 +1,488 @@
+<!DOCTYPE HTML>
+<html lang="hu" class="sidebar-visible no-js ayu">
+    <head>
+        <!-- Book generated using mdBook -->
+        <meta charset="UTF-8">
+        <title>Programozás érettségi gyorstalpaló</title>
+        <meta name="robots" content="noindex" />
+        <!-- Custom HTML head -->
+        <meta content="text/html; charset=utf-8" http-equiv="Content-Type">
+        <meta name="description" content="">
+        <meta name="viewport" content="width=device-width, initial-scale=1">
+        <meta name="theme-color" content="#ffffff" />
+
+        <link rel="icon" href="favicon.svg">
+        <link rel="shortcut icon" href="favicon.png">
+        <link rel="stylesheet" href="css/variables.css">
+        <link rel="stylesheet" href="css/general.css">
+        <link rel="stylesheet" href="css/chrome.css">
+        <link rel="stylesheet" href="css/print.css" media="print">
+        <!-- Fonts -->
+        <link rel="stylesheet" href="FontAwesome/css/font-awesome.css">
+        <link rel="stylesheet" href="fonts/fonts.css">
+        <!-- Highlight.js Stylesheets -->
+        <link rel="stylesheet" href="highlight.css">
+        <link rel="stylesheet" href="tomorrow-night.css">
+        <link rel="stylesheet" href="ayu-highlight.css">
+
+        <!-- Custom theme stylesheets -->
+    </head>
+    <body>
+        <!-- Provide site root to javascript -->
+        <script type="text/javascript">
+            var path_to_root = "";
+            var default_theme = window.matchMedia("(prefers-color-scheme: dark)").matches ? "ayu" : "ayu";
+        </script>
+
+        <!-- Work around some values being stored in localStorage wrapped in quotes -->
+        <script type="text/javascript">
+            try {
+                var theme = localStorage.getItem('mdbook-theme');
+                var sidebar = localStorage.getItem('mdbook-sidebar');
+
+                if (theme.startsWith('"') && theme.endsWith('"')) {
+                    localStorage.setItem('mdbook-theme', theme.slice(1, theme.length - 1));
+                }
+
+                if (sidebar.startsWith('"') && sidebar.endsWith('"')) {
+                    localStorage.setItem('mdbook-sidebar', sidebar.slice(1, sidebar.length - 1));
+                }
+            } catch (e) { }
+        </script>
+
+        <!-- Set the theme before any content is loaded, prevents flash -->
+        <script type="text/javascript">
+            var theme;
+            try { theme = localStorage.getItem('mdbook-theme'); } catch(e) { }
+            if (theme === null || theme === undefined) { theme = default_theme; }
+            var html = document.querySelector('html');
+            html.classList.remove('no-js')
+            html.classList.remove('ayu')
+            html.classList.add(theme);
+            html.classList.add('js');
+        </script>
+
+        <!-- Hide / unhide sidebar before it is displayed -->
+        <script type="text/javascript">
+            var html = document.querySelector('html');
+            var sidebar = 'hidden';
+            if (document.body.clientWidth >= 1080) {
+                try { sidebar = localStorage.getItem('mdbook-sidebar'); } catch(e) { }
+                sidebar = sidebar || 'visible';
+            }
+            html.classList.remove('sidebar-visible');
+            html.classList.add("sidebar-" + sidebar);
+        </script>
+
+        <nav id="sidebar" class="sidebar" aria-label="Table of contents">
+            <div class="sidebar-scrollbox">
+                <ol class="chapter"><li class="chapter-item expanded affix "><a href="index.html">Bevezetés</a></li><li class="chapter-item expanded "><a href="struct.html"><strong aria-hidden="true">1.</strong> Struktúrák</a></li><li class="chapter-item expanded "><a href="alapalgoritmusok/index.html"><strong aria-hidden="true">2.</strong> Alapalgoritmusok</a></li><li><ol class="section"><li class="chapter-item expanded "><a href="alapalgoritmusok/osszegzes.html"><strong aria-hidden="true">2.1.</strong> Összegzés</a></li><li class="chapter-item expanded "><a href="alapalgoritmusok/megszamlalas.html"><strong aria-hidden="true">2.2.</strong> Megszámlálás</a></li><li class="chapter-item expanded "><a href="alapalgoritmusok/elso-utolso.html"><strong aria-hidden="true">2.3.</strong> Első és utolsó érték megtalálása</a></li><li class="chapter-item expanded "><a href="alapalgoritmusok/minmax.html"><strong aria-hidden="true">2.4.</strong> Szélső érték keresés</a></li><li class="chapter-item expanded "><a href="alapalgoritmusok/rendezes.html"><strong aria-hidden="true">2.5.</strong> Sorbarendezés</a></li></ol></li><li class="chapter-item expanded "><a href="beolvasas.html"><strong aria-hidden="true">3.</strong> Beolvasás fájlból</a></li><li class="chapter-item expanded "><a href="egyeb/index.html"><strong aria-hidden="true">4.</strong> Egyéb hasznos dolgok</a></li><li><ol class="section"><li class="chapter-item expanded "><a href="egyeb/formazas.html"><strong aria-hidden="true">4.1.</strong> Trükkök kiíratáshoz</a></li><li class="chapter-item expanded "><a href="egyeb/random.html"><strong aria-hidden="true">4.2.</strong> Véletlenszám-generálás</a></li></ol></li></ol>
+            </div>
+            <div id="sidebar-resize-handle" class="sidebar-resize-handle"></div>
+        </nav>
+
+        <div id="page-wrapper" class="page-wrapper">
+
+            <div class="page">
+                <div id="menu-bar-hover-placeholder"></div>
+                <div id="menu-bar" class="menu-bar sticky bordered">
+                    <div class="left-buttons">
+                        <button id="sidebar-toggle" class="icon-button" type="button" title="Toggle Table of Contents" aria-label="Toggle Table of Contents" aria-controls="sidebar">
+                            <i class="fa fa-bars"></i>
+                        </button>
+                        <button id="theme-toggle" class="icon-button" type="button" title="Change theme" aria-label="Change theme" aria-haspopup="true" aria-expanded="false" aria-controls="theme-list">
+                            <i class="fa fa-paint-brush"></i>
+                        </button>
+                        <ul id="theme-list" class="theme-popup" aria-label="Themes" role="menu">
+                            <li role="none"><button role="menuitem" class="theme" id="light">Light</button></li>
+                            <li role="none"><button role="menuitem" class="theme" id="rust">Rust</button></li>
+                            <li role="none"><button role="menuitem" class="theme" id="coal">Coal</button></li>
+                            <li role="none"><button role="menuitem" class="theme" id="navy">Navy</button></li>
+                            <li role="none"><button role="menuitem" class="theme" id="ayu">Ayu (default)</button></li>
+                        </ul>
+                        <button id="search-toggle" class="icon-button" type="button" title="Search. (Shortkey: s)" aria-label="Toggle Searchbar" aria-expanded="false" aria-keyshortcuts="S" aria-controls="searchbar">
+                            <i class="fa fa-search"></i>
+                        </button>
+                    </div>
+
+                    <h1 class="menu-title">Programozás érettségi gyorstalpaló</h1>
+
+                    <div class="right-buttons">
+                        <a href="print.html" title="Print this book" aria-label="Print this book">
+                            <i id="print-button" class="fa fa-print"></i>
+                        </a>
+                        <a href="https://github.com/bnctth/erettsegi-gyorstalpalo" title="Git repository" aria-label="Git repository">
+                            <i id="git-repository-button" class="fa fa-github"></i>
+                        </a>
+                    </div>
+                </div>
+
+                <div id="search-wrapper" class="hidden">
+                    <form id="searchbar-outer" class="searchbar-outer">
+                        <input type="search" id="searchbar" name="searchbar" placeholder="Search this book ..." aria-controls="searchresults-outer" aria-describedby="searchresults-header">
+                    </form>
+                    <div id="searchresults-outer" class="searchresults-outer hidden">
+                        <div id="searchresults-header" class="searchresults-header"></div>
+                        <ul id="searchresults">
+                        </ul>
+                    </div>
+                </div>
+                <!-- Apply ARIA attributes after the sidebar and the sidebar toggle button are added to the DOM -->
+                <script type="text/javascript">
+                    document.getElementById('sidebar-toggle').setAttribute('aria-expanded', sidebar === 'visible');
+                    document.getElementById('sidebar').setAttribute('aria-hidden', sidebar !== 'visible');
+                    Array.from(document.querySelectorAll('#sidebar a')).forEach(function(link) {
+                        link.setAttribute('tabIndex', sidebar === 'visible' ? 0 : -1);
+                    });
+                </script>
+
+                <div id="content" class="content">
+                    <main>
+                        <h1 id="bevezetés"><a class="header" href="#bevezetés">Bevezetés</a></h1>
+<p>Ezzel a könyvvel szeretnék mindenkinek segíteni az emelt infóérettségire készülésben. Itt a c++ programozáshoz igyekszem leírni a legfontosabb alapokat, de ez közel sem egy jegy a 45 pontos programozáshoz, inkább csak egy tudástár. Feltételezem, a c++ legalapabb dolgaival (változók, típusok, <code>for</code>, <code>while</code> ciklusok, if, else) tisztában vagy, ezért erre építek már a legelejétől kezdve. Sok sikert a felkészüléshez!</p>
+<hr />
+<p><em>A teljes könyv szabadon megosztható, felhasználható és szerkeszthető a licenc betartásával.</em></p>
+<p><a rel="license" href="http://creativecommons.org/licenses/by-sa/4.0/"><img alt="Creative Commons Licenc" style="border-width:0" src="https://i.creativecommons.org/l/by-sa/4.0/88x31.png" /></a><br />Tóth Bence Programozás érettségi gyorstalpalója a <a rel="license" href="http://creativecommons.org/licenses/by-sa/4.0/">Creative Commons Nevezd meg! - Így add tovább! 4.0 Nemzetközi Licenc</a> feltételeinek megfelelően felhasználható.</p>
+<div style="break-before: page; page-break-before: always;"></div><h1 id="struktúrák"><a class="header" href="#struktúrák">Struktúrák</a></h1>
+<p>Az olyan alap típusokat mindenki ismeri, mint az <code>bool</code>, <code>int</code>, <code>float</code>, <code>char</code>, <code>string</code>, tömbök, listák, de van, hogy ezek nem elegek egy feladat elvégzéséhez. Tipikusan nem csak egy-egy kósza <code>int</code>tel dolgozunk, hanem teljes adatsorunk van, mint például egy buszjegy vásárlásánál az ülés, a fel- és a leszállás helye<sup class="footnote-reference"><a href="#helyjegy">1</a></sup>. Ezeket külön-külön 3 tömbben tárolni egy rémálom lenne. Ilyenkor jön képbe a <code>struct</code>, amivel saját komplex adattípust hozhatunk létre. Ebbe több darab, akár többféle típusú adatokat tárolhatunk. Az előző példára visszatérve létrehozhatjuk az alábbi struktúrát:</p>
+<pre><code class="language-cpp">struct foglalas{
+    int ules, fel, le;
+}
+</code></pre>
+<p>Másik példa, amikor egy választás eredményét kell leírni, ahol van minden sorban: a választókerület (1-8), a kapott szavazatok száma, a képviselőjelölt vezeték- és keresztneve, valamint az őt támogató párt rövidítése (független esetén <code>-</code>).<sup class="footnote-reference"><a href="#valasztas">2</a></sup></p>
+<pre><code class="language-cpp">struct eredmeny{
+    int kerulet, szavazatok;
+    string vezeteknev, keresztnev, part;
+}
+</code></pre>
+<p>Ezekből látszik, hogy a struktúrákat akkor használjuk, ha több összefüggő adatunk van, amelyek egymás nélkül értelmetlenek. Az előző példával élve: sokat érek, ha tudom a szavazatok számát, ha nem tudom, ki kapta.</p>
+<p><sup class="footnote-reference"><a href="#helyjegy">1</a></sup> 2010. májusi informatika emelt érettségi</p>
+<p><sup class="footnote-reference"><a href="#valasztas">2</a></sup> 2013. májusi informatika emelt érettségi</p>
+<div style="break-before: page; page-break-before: always;"></div><h1 id="alapalgoritmusok"><a class="header" href="#alapalgoritmusok">Alapalgoritmusok</a></h1>
+<p>Az alapalgoritmusok alkotják minden megoldás alapját, innen az elnevezés. Ha ezeket megtanulod és begyakorlod annyira, hogy egy feladat szövegének elolvasása után felismerd, majd közel robot módjára csak legépeld a megtanult algoritmust, az első pár feladat nem kéne, hogy túl nagy gondot okozzon. Ezeket egy (többnyire) tetszőleges típusú tömbön lehet alkalmazni, legyen annak az eleme primitív vagy struktúra. A legtöbbnél van egy sima változat, amelyik minden elemet vizsgál, és van egy feltételes (pl.: számold meg csak a páros számokat).</p>
+<p>Ha egy tömb struktúrákat tartalmaz, pusztán annyi változik, hogy nem a <code>tomb[i]</code>-vel dolgozunk, hanem a <code>tomb[i].mezo</code>-vel.</p>
+<div style="break-before: page; page-break-before: always;"></div><h1 id="Összegzés"><a class="header" href="#Összegzés">Összegzés</a></h1>
+<p>Ha egy tömb (bizonyos) elemeinek az összege érdekel minket, pusztán végig kell mennünk ezen, és egy, a cikluson kívül felvett változóba adogassuk a bele az egyes elemeket. Ez utóbbi azért fontos, mert ha a ciklusmagba (a <code>{}</code> között lévő rész) rakjuk a változó létrehozását, minden egyes körben létrejön, és nullázódik az értéke.</p>
+<h2 id="alap"><a class="header" href="#alap">Alap</a></h2>
+<pre><code class="language-cpp">int tomb[50] = {...};
+
+int osszeg = 0; // fontos, hogy kinullázzuk, különben az összeg kezdőértéke bármi lehet
+for(int i = 0; i &lt; 50; i++) {
+    osszeg += tomb[i]; // osszeg = osszeg + tomb[i]
+}
+</code></pre>
+<p>Itt amire a legfontosabb figyelni, hogy az <code>i</code> az nem egy érték, csupán a sorszáma a tömbön belüli elemnek.</p>
+<h2 id="feltételes"><a class="header" href="#feltételes">Feltételes</a></h2>
+<p>Mondjuk azt, hogy csak a pozitív számok összege érdekel minket.</p>
+<pre><code class="language-cpp">int tomb[50] = {...};
+
+int osszeg = 0;
+for(int i = 0; i &lt; 50; i++) {
+    if(tomb[i] &gt; 0) {
+        osszeg += tomb[i];
+    }
+}
+</code></pre>
+<p>Pusztán annyi változik, ha nem pozitív a szám, semmit sem csinálunk.</p>
+<p>De ha struktúránk van, az se probléma. Itt is csak a megfelelő mezőkkel kell dolgozni.</p>
+<pre><code class="language-cpp">struct adat{
+    bool feltetel;
+    int ertek;
+}
+
+adat tomb[50] = {...};
+
+int osszeg = 0;
+for(int i = 0; i &lt; 50; i++) {
+    if(tomb[i].feltetel) { // itt nem kell == true, hiszen a bool maga egy true-false érték
+        osszeg += tomb[i].ertek;
+    }
+}
+</code></pre>
+<div style="break-before: page; page-break-before: always;"></div><h1 id="megszámlálás"><a class="header" href="#megszámlálás">Megszámlálás</a></h1>
+<p>A megszámlálás abból a szempontból különleges, hogy itt nem igazán beszélhetünk alap verzióról, hiszen ahhoz, hogy végigmenjünk a tömbön, tudnunk kell a hosszát, tehát ahhoz, hogy megszámoljuk, mennyi adatunk van egy tömbben, tudnunk kell, mennyi adatunk van a tömbben. Ez majdnem megegyezik az összegzéssel, csak itt nem az értékkel növeljük a változónkat, hanem mindig eggyel.</p>
+<h2 id="feltételes-1"><a class="header" href="#feltételes-1">Feltételes</a></h2>
+<p>Számoljuk meg a pozitív számokat.</p>
+<pre><code class="language-cpp">int tomb[50] = {...};
+
+int db = 0;
+for(int i = 0; i &lt; 50; i++){
+    if(tomb[i] &gt; 0){
+        db++; // db += 1 avagy db = db + 1
+    }
+}
+</code></pre>
+<div style="break-before: page; page-break-before: always;"></div><h1 id="első-és-utolsó-érték-megtalálása"><a class="header" href="#első-és-utolsó-érték-megtalálása">Első és utolsó érték megtalálása</a></h1>
+<h2 id="alap-1"><a class="header" href="#alap-1">Alap</a></h2>
+<p>Ez feltétel nélkül nem is igazán algoritmus, de azért a biztonság kedvéért leírom.</p>
+<pre><code class="language-cpp">int tomb[50] = {...};
+
+tomb[0]; //első
+tomb[50-1]; //utolsó
+</code></pre>
+<h2 id="feltétel"><a class="header" href="#feltétel">Feltétel</a></h2>
+<h3 id="első"><a class="header" href="#első">Első</a></h3>
+<p>Egyszerűen addig megyünk, amíg nem találunk egy, a feltételeknek megfelelő elemet. Viszont azt is ellenőrizni akarjuk, van-e egyáltalán ilyen. Keressük meg az első pozitív elemet. Minden ugyanígy működik, ha struktúránk van, csak az elso/utolso változónk típusa mindig egyezzen meg a keresett elem típusával.</p>
+<pre><code class="language-cpp">int tomb[50] = {...};
+
+bool talalt = false; // azt tárolja, találtunk-e megfelelő elemet
+int elso = -1;
+for(int i = 0; i &lt; 50; i++){
+    if(tomb[i] &gt; 0){
+        elso = tomb[i];
+        talalt = true;
+        break;
+    }
+}
+
+if(talalt){
+    // felhasználjuk az `elso`t
+} else{
+    // nem talált
+}
+</code></pre>
+<h3 id="utolsó"><a class="header" href="#utolsó">Utolsó</a></h3>
+<p>Ugyanazt csináljuk, csak a for ciklusunk visszafele fog menni</p>
+<pre><code class="language-cpp">int tomb[50] = {...};
+
+bool talalt = false;
+int utolso = -1;
+for(int i = 50-1; i &gt;= 0; i--){ // csak ez változott
+    if(tomb[i] &gt; 0){
+        utolso = tomb[i];
+        talalt = true;
+        break;
+    }
+}
+</code></pre>
+<div style="break-before: page; page-break-before: always;"></div><h1 id="szélső-érték-keresés"><a class="header" href="#szélső-érték-keresés">Szélső érték keresés</a></h1>
+<p>Szélső érték keresése alatt a legkisebb vagy legnagyobb érték kereséséről beszélünk. Lehet az értéket vagy az indexet eltárolni, én az utóbbit javaslom mindenhez, mert ezzel rengeteg elnézhető dolog elkerülhető. A példákban mindig a maximumot fogom keresni, de a minimumhoz csak meg kell fordítani a kacsacsőröket.</p>
+<h2 id="alap-2"><a class="header" href="#alap-2">Alap</a></h2>
+<h3 id="primitív"><a class="header" href="#primitív">Primitív</a></h3>
+<pre><code class="language-cpp">int tomb[50] = {...};
+
+int max_index = 0;
+
+for(int i = 1; i &lt; 50; i++){  // i = 1, mert a nulladik már úgyis a max
+    if(tomb[i] &gt; tomb[max_index]){ // ha a *legnagyobbnál* találunk egy nagyobbat
+        max_index = i; // átveszi az a helyét
+    }
+}
+</code></pre>
+<h3 id="struktúra"><a class="header" href="#struktúra">Struktúra</a></h3>
+<p>Itt az összehasonlítás alapja és a keresett érték az lehet több külön mező is, emiatt gyakran egyszerűbb az indexét eltárolni az adott elemnek. Mondjuk azt, hogy egy választás győztesének a neve érdekel minket.</p>
+<pre><code class="language-cpp">struct eredmeny{
+    int szavazat;
+    str keresztnev, vezeteknev;
+}
+
+eredmeny tomb[50] = {...};
+
+int max_index = 0; // ez lehet 0, hiszen ez a nulladik elemre utal
+for(int i = 1; i &lt; 50; i++){
+    if(tomb[i].szavazat &gt; tomb[max_index].szavazat){
+        max_index = i;
+    }
+}
+
+string nev = tomb[max_index].vezeteknev + &quot; &quot; + tomb[max_index].keresztnev;
+</code></pre>
+<h2 id="feltételes-2"><a class="header" href="#feltételes-2">Feltételes</a></h2>
+<p>Itt fontos, hogy megfelelő alapértéket választása, hiszen nem garantált, hogy a nulladik elem megfelel a kritériumnak. Ezért kettő ciklus kell: először megtaláljuk az első megfelelő értéket, utána pedig a tényleges szélső érték keresés. Ezekben a példákban feltételezzük, hogy legalább egy érték megfelel a feltételnek.</p>
+<h3 id="primitív-1"><a class="header" href="#primitív-1">Primitív</a></h3>
+<p>Keressük meg a legnagyobb negatív számot.</p>
+<pre><code class="language-cpp">int tomb[50] = {...};
+
+int max_index = -1; // muszáj a `for`on kívül felvenni, különben azon kívül nem lenne elérhető
+for(int i = 0; i &lt; 50; i++){
+    if(tomb[i] &lt; 0){
+        max_index = i;
+        break;
+    }
+}
+
+for(int i = max_index+1; i &lt; 50; i++){ // itt nyugodtan kezdhetünk max_indexről, hiszen tudjuk, előtte nincs megfelelő érték
+    if(tomb[i] &lt; 0 &amp;&amp; tomb[i] &gt; tomb[max_index]){
+        max_index = i;
+    }
+}
+</code></pre>
+<h3 id="struktúra-1"><a class="header" href="#struktúra-1">Struktúra</a></h3>
+<p>Most a legtöbb szavazatot kapott Bélát keressük. Miért? Nem tudom, de az érettségi is hasonló baromságokat kérdez.</p>
+<pre><code class="language-cpp">struct eredmeny{
+    int szavazat;
+    str keresztnev, vezeteknev;
+}
+
+eredmeny tomb[50] = {...};
+
+int max_index = -1;
+for(int i = 0; i &lt; 50; i++){
+    if(tomb[i].keresztnev == &quot;Béla&quot;){
+        max_index = i;
+        break;
+    }
+}
+
+for(int i = max_index+1; i &lt; 50; i++){
+    if(tomb[i].keresztnev == &quot;Béla&quot; &amp;&amp; tomb[i].szavazat &gt; tomb[max_index].szavazat){
+        max_index = i;
+    }
+}
+</code></pre>
+<div style="break-before: page; page-break-before: always;"></div><h1 id="sorbarendezés"><a class="header" href="#sorbarendezés">Sorbarendezés</a></h1>
+<p>Rendezéshez többféle algoritmus van, mint égen a csillag, úgyhogy csak a legegyszerűbbet írom le, ez az egyszerű cserés rendezés.</p>
+<pre><code class="language-cpp">int tomb[50] = {...};
+
+for(int i = 0; i &lt; 50-1; i++){ // itt csak az utolsó előtti elemig megyünk
+    for(int j = i+1; j &lt; 50; j++){ //itt pedig i+1-től a tömb végéig
+        if(tomb[i] &gt; tomb[j]){
+            swap(tomb[i]; tomb[j]); //egy beépített függvény, ami megcseréli a két elem értékét
+        }
+    }
+}
+</code></pre>
+<p>A küldső forral az <code>i</code> végigmegy a tömb elemein az elejétől az utolsó előtti elemig. Mindig ez lesz <em>előrébb</em> a kettő érték közül, vagyis növekvő sorrend esetén ennek a <code>tomb[i]</code>nek kell kisebbnek lennie. Ezután a <code>j</code> végigmegy a tömb minden <code>i</code> utáni elemén, és megnézi, jó sorrendben vannak-e. Mire a végére ér, az <code>i</code>. helyen már a megfelelő elem fog állni.</p>
+<div style="break-before: page; page-break-before: always;"></div><h1 id="beolvasás-fájlból"><a class="header" href="#beolvasás-fájlból">Beolvasás fájlból</a></h1>
+<p>Mostmár remekül tudunk adatokkal dolgozni, már csak be kéne őket olvasni. A legfontosabb alapszabály: a fájlt <strong>mindig</strong> zárjuk be, ha végeztünk vele.
+Ezután pár dolgot el kell döntenünk.</p>
+<h2 id="tömb-hossza"><a class="header" href="#tömb-hossza">Tömb hossza</a></h2>
+<p>Ehhez tipikusan 3 módszer áll rendelkezésre:</p>
+<ul>
+<li>megadják a fájl elején, hogy hány sort tartalmaz</li>
+<li>megadják, legfeljebb hány sor adat lehe</li>
+<li>nem adnak meg semmit (ilyen talán sose történt még érettségin)
+Ezeket a mogoldásokat ilyen sorrendben célszerű használni, hiszen fentről lefele egyre nehezebb a kivitelezésük.</li>
+</ul>
+<h3 id="megadott-sorszámmal"><a class="header" href="#megadott-sorszámmal">Megadott sorszámmal</a></h3>
+<p>Ilyenkor az első dolgunk beolvasni a megadott sorszámot, majd ezután egy olyan hosszú tömböt létrehozni. Ezután pusztán bele kell olvasni az adatokat és kész is vagyunk.</p>
+<pre><code class="language-cpp">#include &lt;fstream&gt;
+
+struct adat{
+    int mezo1, mezo2, mezo3;
+}
+
+ifstream be(&quot;filenev.txt&quot;);
+int n; //ez lesz a tömb hossza
+be &gt;&gt; n;
+adat tomb[n];
+for(int i = 0; i &lt; n; i++){
+    be &gt;&gt; tomb[i].mezo1 &gt;&gt; tomb[i].mezo2 &gt;&gt; tomb[i].mezo3;
+}
+be.close();
+</code></pre>
+<h3 id="megadott-legnagyobb-méret"><a class="header" href="#megadott-legnagyobb-méret">Megadott legnagyobb méret</a></h3>
+<p>Ilyenkor létrehozzuk azt a tömböt, amibe garantáltan belefér (a példában ez 1000 lesz), majd feltöltés közben ellenőrizzük, hogy sikeres volt-e a beolvasás, ha igen, akkor megnövelünk egy változót, ami a tényleges hosszát tárolja.</p>
+<pre><code class="language-cpp">#include &lt;fstream&gt;
+
+struct adat{
+    int mezo1, mezo2, mezo3;
+}
+
+ifstream be(&quot;filenev.txt&quot;);
+adat tomb[1000];
+int n = 0;
+while(be &gt;&gt; tomb[n].mezo1 &gt;&gt; tomb[n].mezo2 &gt;&gt; tomb[n].mezo3){
+    n++;
+}
+be.close();
+</code></pre>
+<p>Az használjuk ki, hogy a <code>&gt;&gt;</code> visszaad egy igaz-hamis értéket, ami azt mondja, sikeres volt-e a beolvasás. A végén az n lesz a tömb valódi hossza.</p>
+<h3 id="semmi"><a class="header" href="#semmi">Semmi</a></h3>
+<p>Ilyenkor kétszer megyünk végig az adatokon: először megnézzük, hány sor adat van, majd az ilyen hosszú tömbbe beolvassuk az adatokat. <strong>FONTOS</strong>: <em>van, hogy a forrásfájl végén van egy üres sor. Ha azt látod, hogy a beolvasás után a tömb utolsó elemében memóriaszemét van, akkor csökkentsd az <code>n</code>t eggyel a megszámolás után!</em></p>
+<pre><code class="language-cpp">#include &lt;fstream&gt;
+
+struct adat{
+    int mezo1, mezo2, mezo3;
+}
+
+ifstream be(&quot;filenev.txt&quot;);
+
+string szemetes;
+int n = 0;
+while(!file.eof()){
+    getline(be, szemetes);
+    n++;
+}
+// n--; // ha kell
+adat tomb[n];
+for(int i = 0; i &lt; n; i++){
+    be &gt;&gt; tomb[i].mezo1 &gt;&gt; tomb[i].mezo2 &gt;&gt; tomb[i].mezo3;
+}
+be.close();
+</code></pre>
+<h2 id="vagy-getline"><a class="header" href="#vagy-getline"><code>&gt;&gt;</code> vagy <code>getline</code></a></h2>
+<p>A <code>&gt;&gt;</code> operátor ún. <em>whitespace</em> karakterekig olvas be, ilyen például a szóköz, a tab, vagy a sorvég. Emiatt nem tudjuk használni, ha ismeretlen számú, szóközzel elválasztott szöveget kell beolvasnunk. Ilyen például egy zene címe, vagy emberek neve, ha nincs megadva, hogy hány neve van mindenkinek.</p>
+<p>Viszont nagy problémát szokott okozni, hogy a <code>&gt;&gt;</code> az elválasztó karakter előtt áll meg, míg a <code>getline</code> utána. Úgy kell elképzelni ezeket, mint amikor a kisgyerekek olvasnak: ahogy haladnak betűről betűre, úgy viszik az ujjukat is. Amikor valamiért megállnak, ott tartják az ujjukat, majd később onnan folytatják. Emiatt probléma, hogy a <code>&gt;&gt;</code> a sorvég előtt <em>hagyja az ujját</em>, hiszen utána a <code>getline</code> elkezd olvasni, az első karakter, amit meglát az a sorvég, és azt mondja köszöni szépen végzett is. Emiatt ha <code>&gt;&gt;</code>-ről váltunk <code>getline</code>ra, azt mindig kétszer kell futtatni, mert először egy üres <code>string</code>et ad, majd másodszor adja a tényleges sort. Fordított helyzetben ezzel nincs probléma. Nézzünk is erre egy példát. Minden sorban egy szám, majd tetszőleges mennyiségű szó van.</p>
+<pre><code class="language-cpp">struct adat{
+    int szam;
+    string szoveg;
+}
+
+adat tomb[n];
+string szemet; //ebbe fog menni az üres string
+for(int i = 0; i &lt; n; i++){
+    be &gt;&gt; tomb[i].szam;
+    getline(be, szemet);
+    getline(be, tomb[i].szoveg);
+}
+</code></pre>
+<div style="break-before: page; page-break-before: always;"></div><h1 id="egyéb-hasznos-dolgok"><a class="header" href="#egyéb-hasznos-dolgok">Egyéb hasznos dolgok</a></h1>
+<p>Ebben a fejezetben egyéb olyan hasznos dolgo szerepelnek, amik időnként előfordulhatnak.</p>
+<div style="break-before: page; page-break-before: always;"></div><h1 id="trükkök-kiíratáshoz"><a class="header" href="#trükkök-kiíratáshoz">Trükkök kiíratáshoz</a></h1>
+<p>Sokszor van, hogy valamilyen módon formázni kell a kimenetet.</p>
+<h2 id="kerekítés"><a class="header" href="#kerekítés">Kerekítés</a></h2>
+<p>Leggyakrabban kerekíteni kell valamilyen átlagot vagy százalékot. Szerencsére erre vannak beépített függvények.</p>
+<pre><code class="language-cpp">#include &lt;iomanip&gt;
+
+float x = 3.14159;
+cout &lt;&lt; fixed &lt;&lt; setprecision(2) &lt;&lt; x &lt;&lt; endl; // 3.14
+</code></pre>
+<p>A fixed egy kötelező elem a megfelelő megjelenéshez, a setprecisionnel pedig megmondod, hány tizedesjegyre szeretnéd kerekíteni.</p>
+<h2 id="fix-szélesség"><a class="header" href="#fix-szélesség">Fix szélesség</a></h2>
+<p>Ritkább, de előfordult már, hogy megmondják, egy számot mindig 3 számjeggyel kell kiírni, ha kevesebb, rakjunk elé 0-t. Erre is tartogat számunkra az <code>iomanip</code> egy trükköt.</p>
+<pre><code class="language-cpp">#include &lt;iomanip&gt;
+
+int x = 1;
+cout &lt;&lt; setfill('0') &lt;&lt; setw(3) &lt;&lt; x &lt;&lt; endl; // 001
+</code></pre>
+<p>A <code>setfill</code>el megadhatunk egy tetszőleges karaktert, amivel ki fogja tölteni a fennmaradó helyet, míg a <code>setw</code> (w mint width) megadja, milyen széles a kívánt eredmény.</p>
+<div style="break-before: page; page-break-before: always;"></div><h1 id="véletlenszám-generálás"><a class="header" href="#véletlenszám-generálás">Véletlenszám-generálás</a></h1>
+<p>Gyakori feladat, hogy egy [<code>a</code>; <code>b</code>[ intervallumba eső random számot kell generálnunk. Ehhez először be kell állítanunk egy <code>seed</code>et, különben minden futtatásnál ugyanazt a <del>random</del> számot kapnánk.</p>
+<pre><code class="language-cpp">srand(time(0)); //ezzel állítjuk be a `seed`et
+rand() % (b - a) + a;
+</code></pre>
+<p>A <code>rand()</code> 0-tól egy hatalmas számig bármit adhat, ezt lecsükkentjük úgy, hogy 0 és az intervallum hossza közé essen, majd eltoljuk úgy, hogy 0 helyett jó helyen legyen az intervallum alja (és ezzel együtt a teteje is).</p>
+
+                    </main>
+
+                    <nav class="nav-wrapper" aria-label="Page navigation">
+                        <!-- Mobile navigation buttons -->
+                        <div style="clear: both"></div>
+                    </nav>
+                </div>
+            </div>
+
+            <nav class="nav-wide-wrapper" aria-label="Page navigation">
+            </nav>
+
+        </div>
+
+        <script type="text/javascript">
+            window.playground_copyable = true;
+        </script>
+        <script src="elasticlunr.min.js" type="text/javascript" charset="utf-8"></script>
+        <script src="mark.min.js" type="text/javascript" charset="utf-8"></script>
+        <script src="searcher.js" type="text/javascript" charset="utf-8"></script>
+        <script src="clipboard.min.js" type="text/javascript" charset="utf-8"></script>
+        <script src="highlight.js" type="text/javascript" charset="utf-8"></script>
+        <script src="book.js" type="text/javascript" charset="utf-8"></script>
+
+        <!-- Custom JS scripts -->
+        <script type="text/javascript">
+        window.addEventListener('load', function() {
+            window.setTimeout(window.print, 100);
+        });
+        </script>
+    </body>
+</html>
